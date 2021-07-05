@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Файлы", "Файлы", "{014269D7-172A-4A53-B1F0-781A5C1D7482}"
 	ProjectSection(SolutionItems) = preProject
 		bin\Debug\Log.txt = bin\Debug\Log.txt
+		..\..\UML.vsdx = ..\..\UML.vsdx
 		bin\Debug\Ввод.csv = bin\Debug\Ввод.csv
 		bin\Debug\Вывод.csv = bin\Debug\Вывод.csv
 		..\..\Решение ММ.docx = ..\..\Решение ММ.docx
