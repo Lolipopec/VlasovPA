@@ -279,12 +279,13 @@ namespace Critical
             dlg.DefaultExt = ".txt";
             dlg.Filter = "CSV documents (.csv)|*.csv";
             dlg.ShowDialog();
-            return dlg.FileName;
             if (dlg.FileName == "Файл")
             {
                 MessageBox.Show("Вы не выбрали файл");
                 Environment.Exit(0);
+                return dlg.FileName;
             }
+            else { return dlg.FileName; }
         }
     }
 }
