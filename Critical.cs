@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Critical
 {
@@ -33,22 +35,32 @@ namespace Critical
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public List<Str> Input()
+        public List<Str> Input(string path)
         {
             Debug.WriteLine("Чтение:");
             List<Str> StQ = new List<Str>();
-            using (StreamReader sr = new StreamReader(@"Ввод.csv"))
+            try
             {
-                while (sr.EndOfStream != true)
+                using (StreamReader sr = new StreamReader(path))
                 {
-                    string[] s1 = sr.ReadLine().Split(';');
-                    string[] s2 = s1[0].Split('-');
-                    Debug.WriteLine(s2[0] + " - " + s2[1] + "; " + s1[1]);
-                    StQ.Add(new Str { point1 = Convert.ToInt32(s2[0]), point2 = Convert.ToInt32(s2[1]), length = Convert.ToInt32(s1[1]) });
+                    while (sr.EndOfStream != true)
+                    {
+                        string[] s1 = sr.ReadLine().Split(';');
+                        string[] s2 = s1[0].Split('-');
+                        Debug.WriteLine(s2[0] + " - " + s2[1] + "; " + s1[1]);
+                        StQ.Add(new Str { point1 = Convert.ToInt32(s2[0]), point2 = Convert.ToInt32(s2[1]), length = Convert.ToInt32(s1[1]) });
 
+                    }
                 }
+                return StQ;
             }
-            return StQ;
+            catch 
+            {
+                MessageBox.Show("Вы не выбрали файл");
+                Debug.WriteLine("Вы не выбрали файл");
+                Environment.Exit(0);
+                return StQ;
+            }
         }
         /// <summary>
         /// Метод записи в файл решения.
@@ -56,13 +68,13 @@ namespace Critical
         /// <param name="LPathFunc"></param>
         /// <param name="maxind"></param>
         /// <param name="max"></param>
-        public void Output(List<List<Str>> LPathFunc, int maxind, int max)
+        public void Output(List<List<Str>> LPathFunc, int maxind, int max, string path)
         {
-            using (StreamWriter sr = new StreamWriter(@"Вывод.csv", false, Encoding.Default, 10))
+            using (StreamWriter sr = new StreamWriter(path, false, Encoding.Default, 10))
             {
                 foreach (Str Path in LPathFunc[maxind])
                 {
-                    sr.Write(Path.point1 + " - " + Path.point2 + ";(");
+                    sr.Write(Path.point1 + " - " + Path.point2 + ";");
                 }
                 sr.WriteLine("\nДлина " + max);
             }
@@ -89,7 +101,8 @@ namespace Critical
         public void Work()
         {
             List<Str> LPath;//лист путей
-            List<Str> StQ = Input();//лист исходных данных 
+            MessageBox.Show("Выберите файл для чтения");
+            List<Str> StQ = Input(Dialog());//лист исходных данных 
             LPath = StQ.FindAll(x => x.point1 == StQ[MinElem(StQ)].point1);//запись точки начала в лист путей
             List<List<Str>> LPathFunc = new List<List<Str>>();//лист путей и функций
             foreach (Str rb in LPath)//построение путей из начальных возможных перемещений
@@ -110,8 +123,9 @@ namespace Critical
             }
             Debug.WriteLine("Максимум " + max);
             Debug.WriteLine("Номер максимума " + maxind);
-            Output(LPathFunc, maxind, max);//Запись в файл решения
-            Debug.Listeners.Clear();
+            MessageBox.Show("Выберите файл для записи");
+            Output(LPathFunc, maxind, max, Dialog());//Запись в файл решения
+            Environment.Exit(0);
         }
         /// <summary>
         /// Поиск начальной точки.Путем взятия самого маленького из первого столбца, которого нет во втором.
@@ -242,6 +256,20 @@ namespace Critical
             }
             return Lenght;
         }
+        [STAThread]
+        static string Dialog()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.FileName = "Document";
+            dlg.DefaultExt = ".txt";
+            dlg.Filter = "CSV documents (.csv)|*.csv";
+            dlg.ShowDialog();
+            return dlg.FileName;
+            if (dlg.FileName == "Document")
+            {
+                MessageBox.Show("Вы не выбрали файл");
+                Environment.Exit(0);
+            }
+        }
     }
-
 }

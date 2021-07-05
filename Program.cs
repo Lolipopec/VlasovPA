@@ -10,6 +10,7 @@ namespace Critical
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             Debug.Listeners.Add(new TextWriterTraceListener(File.CreateText("Log.txt")));
