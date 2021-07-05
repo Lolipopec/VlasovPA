@@ -15,7 +15,7 @@ namespace Critical
         {
             Debug.Listeners.Add(new TextWriterTraceListener(File.CreateText("Log.txt")));
             Debug.AutoFlush = true;
-            Critical cr = new Critical();
+            Critic cr = new Critic();
             cr.Work();
         }
     }

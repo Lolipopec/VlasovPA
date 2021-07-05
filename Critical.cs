@@ -10,9 +10,9 @@ using System.Windows;
 
 namespace Critical
 {
-    class Critical
+    public class Critic
     {
-        string s = "";
+        string s = "";//Строчная переменная для записи путей.
         /// <summary>
         /// Структура путей и стоимости перемещения
         /// </summary>
@@ -256,16 +256,20 @@ namespace Critical
             }
             return Lenght;
         }
+        /// <summary>
+        /// Метод открытия диалога
+        /// </summary>
+        /// <returns>Возвращает путь к файлу выбранного в диалоге.</returns>
         [STAThread]
         static string Dialog()
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.FileName = "Document";
+            dlg.FileName = "Файл";
             dlg.DefaultExt = ".txt";
             dlg.Filter = "CSV documents (.csv)|*.csv";
             dlg.ShowDialog();
             return dlg.FileName;
-            if (dlg.FileName == "Document")
+            if (dlg.FileName == "Файл")
             {
                 MessageBox.Show("Вы не выбрали файл");
                 Environment.Exit(0);
