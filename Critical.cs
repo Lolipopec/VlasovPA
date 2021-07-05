@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -41,18 +42,28 @@ namespace Critical
             List<Str> StQ = new List<Str>();
             try
             {
-                using (StreamReader sr = new StreamReader(path))
+                try
                 {
-                    while (sr.EndOfStream != true)
+                    using (StreamReader sr = new StreamReader(path))
                     {
-                        string[] s1 = sr.ReadLine().Split(';');
-                        string[] s2 = s1[0].Split('-');
-                        Debug.WriteLine(s2[0] + " - " + s2[1] + "; " + s1[1]);
-                        StQ.Add(new Str { point1 = Convert.ToInt32(s2[0]), point2 = Convert.ToInt32(s2[1]), length = Convert.ToInt32(s1[1]) });
+                        while (sr.EndOfStream != true)
+                        {
+                            string[] s1 = sr.ReadLine().Split(';');
+                            string[] s2 = s1[0].Split('-');
+                            Debug.WriteLine(s2[0] + " - " + s2[1] + "; " + s1[1]);
+                            StQ.Add(new Str { point1 = Convert.ToInt32(s2[0]), point2 = Convert.ToInt32(s2[1]), length = Convert.ToInt32(s1[1]) });
 
+                        }
                     }
+                    return StQ;
                 }
-                return StQ;
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    MessageBox.Show("Ошиба ввода");
+                    Environment.Exit(0);
+                    return StQ;
+                }
             }
             catch 
             {

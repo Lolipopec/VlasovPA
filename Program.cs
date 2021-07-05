@@ -13,9 +13,9 @@ namespace Critical
         [STAThread]
         static void Main(string[] args)
         {
-            Debug.Listeners.Add(new TextWriterTraceListener(File.CreateText("Log.txt")));
-            Debug.AutoFlush = true;
-            Critic cr = new Critic();
+            Debug.Listeners.Add(new TextWriterTraceListener(File.CreateText("Log.txt"))); //Слушатель на консоль
+            Debug.AutoFlush = true;//Автозапись
+            Critic cr = new Critic();//Вызов модуля
             cr.Work();
         }
     }
