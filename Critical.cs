@@ -81,5 +81,13 @@ namespace Critical
                 Debug.WriteLine("");
             }
         }
+        /// <summary>
+        /// Рабочий метод по построению путей и подсчета длины.
+        /// </summary>
+        public void Work()
+        {
+            List<Str> LPath;//лист путей
+            List<Str> StQ = Input();//лист исходных данных          
+        }
     }
 }
