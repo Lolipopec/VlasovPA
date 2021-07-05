@@ -13,7 +13,7 @@ namespace Critical
 {
     public class Critic
     {
-        string s = "";//Строчная переменная для записи путей.
+        public string s = "";//Строчная переменная для записи путей.
         /// <summary>
         /// Структура путей и стоимости перемещения
         /// </summary>
@@ -272,7 +272,7 @@ namespace Critical
         /// </summary>
         /// <returns>Возвращает путь к файлу выбранного в диалоге.</returns>
         [STAThread]
-        static string Dialog()
+        public static string Dialog()
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.FileName = "Файл";

@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Critical", "Critical.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "..\UnitTestProject1\UnitTestProject1.csproj", "{CFCEFD1A-0E9C-4461-AA05-2B5F3A57DAF2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Файлы", "Файлы", "{014269D7-172A-4A53-B1F0-781A5C1D7482}"
+	ProjectSection(SolutionItems) = preProject
+		bin\Debug\Log.txt = bin\Debug\Log.txt
+		bin\Debug\Ввод.csv = bin\Debug\Ввод.csv
+		bin\Debug\Вывод.csv = bin\Debug\Вывод.csv
+		..\..\Решение ММ.docx = ..\..\Решение ММ.docx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
